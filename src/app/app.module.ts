@@ -1,18 +1,19 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
 
-import {A11yModule} from '@angular/cdk/a11y';
-import {BidiModule} from '@angular/cdk/bidi';
-import {ObserversModule} from '@angular/cdk/observers';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {PlatformModule} from '@angular/cdk/platform';
-import {PortalModule} from '@angular/cdk/portal';
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
-import {CdkStepperModule} from '@angular/cdk/stepper';
-import {CdkTableModule} from '@angular/cdk/table';
+import { A11yModule } from "@angular/cdk/a11y";
+import { BidiModule } from "@angular/cdk/bidi";
+import { ObserversModule } from "@angular/cdk/observers";
+import { OverlayModule } from "@angular/cdk/overlay";
+import { PlatformModule } from "@angular/cdk/platform";
+import { PortalModule } from "@angular/cdk/portal";
+import { ScrollDispatchModule } from "@angular/cdk/scrolling";
+import { CdkStepperModule } from "@angular/cdk/stepper";
+import { CdkTableModule } from "@angular/cdk/table";
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -42,12 +43,24 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule,
-} from '@angular/material';
-import {AppComponent} from './app.component';
+  MatTooltipModule
+} from "@angular/material";
+
+// source imports provided by this repo
+import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app-routing.module";
+
+import { HeroesModule } from "./heroes/heroes.module";
+import { ComposeMessageComponent } from "./compose-message.component";
+import { LoginRoutingModule } from "./login-routing.module";
+import { LoginComponent } from "./login.component";
+import { PageNotFoundComponent } from "./not-found.component";
+
+import { DialogService } from "./dialog.service";
+import { AppTabsComponent } from "./playground/app-tabs/app-tabs.component";
 
 /**
- * NgModule that includes all Material modules that are required to serve 
+ * NgModule that includes all Material modules that are required to serve
  * the Plunker.
  */
 @NgModule({
@@ -62,7 +75,7 @@ import {AppComponent} from './app.component';
     ScrollDispatchModule,
     CdkStepperModule,
     CdkTableModule,
-    
+
     // Material
     MatAutocompleteModule,
     MatButtonModule,
@@ -92,8 +105,9 @@ import {AppComponent} from './app.component';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatNativeDateModule,
-  ]
+    MatNativeDateModule
+  ],
+  declarations: []
 })
 export class MaterialModule {}
 
@@ -104,11 +118,22 @@ export class MaterialModule {}
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HeroesModule,
+    LoginRoutingModule,
+    AppRoutingModule,
+    AppTabsComponent
   ],
-  declarations: [AppComponent],
+  exports: [AppTabsComponent],
+  declarations: [
+    AppComponent,
+    AppTabsComponent,
+    ComposeMessageComponent,
+    LoginComponent,
+    PageNotFoundComponent
+  ],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [DialogService]
 })
 export class AppModule {}
 

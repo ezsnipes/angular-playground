@@ -1,11 +1,16 @@
 <mat-toolbar color="primary">
-  Angular Material 2 App
+  <span>MD Angular Playground</span>
 </mat-toolbar>
 <div class="basic-container">
-  <p>
-    <button mat-button>Basic Button</button>
-    <mat-slide-toggle>Slide Toggle</mat-slide-toggle>
-  </p>
+  <nav>
+    <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
+    <a routerLink="/superheroes" routerLinkActive="active">Heroes</a>
+    <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+    <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
+  </nav>
+  <router-outlet></router-outlet>
+  <router-outlet name="popup"></router-outlet>
   <span class="version-info">Current build: {{version.full}}</span>
 </div>
 
